@@ -7,9 +7,9 @@ allowed-tools:
   - "Read"
 ---
 
-# Stitch MCP — Upload Screens from Images
+# Stitch MCP — Upload Screens from Local Files
 
-Uploads one or more images (screenshots, mockups, wireframes) into a Stitch project as new screens. This is the entry point for the "redesign existing UI" workflow — import what you have, then use `edit_screens` to iterate or convert directly to code.
+Uploads local screenshots/mockups/HTML prototypes into a Stitch project as new screens. This is the entry point for the "redesign existing UI" workflow — import what you have, then use `edit_screens` to iterate or convert directly to code.
 
 ## Critical prerequisite
 
@@ -23,28 +23,67 @@ You must have a `projectId` before calling this. If you don't have one:
 
 - User provides a screenshot and wants to redesign it in Stitch
 - User wants to import existing mockups into Stitch for editing
+- User wants to upload an HTML prototype into Stitch
 - The orchestrator classifies intent as "Upload screenshot"
 - User says "import this design", "upload this image", or "redesign this screen"
 
-## Step 1: Encode the image to base64
+## Preferred path: SDK upload helper
 
-Use the helper script to convert a local image file to base64:
+Use the included SDK helper when uploading local files from Claude Code:
+
+```bash
+node <skill-dir>/scripts/upload-screen.mjs --project <projectId> --file <filePath> --title <title>
+```
+
+If your current working directory is this skill directory:
+
+```bash
+node scripts/upload-screen.mjs --project <projectId> --file <filePath> --title <title>
+```
+
+Example:
+
+```bash
+node scripts/upload-screen.mjs --project 16150285609543967393 --file "ui/1设备模型-模型详情.png" --title "1设备模型-模型详情"
+```
+
+`scripts/upload-screen.mjs`:
+
+- Uses globally installed `@google/stitch-sdk`.
+- Reads the Stitch API key from `~/.claude/settings.json` at `mcpServers.stitch.headers.X-Goog-Api-Key` unless `STITCH_API_KEY` is set.
+- Routes SDK networking through an Undici `ProxyAgent`.
+- Defaults to `http://localhost:7890` unless `--proxy`, `HTTPS_PROXY`, or `HTTP_PROXY` is set.
+- Accepts `projects/<id>` or bare numeric project IDs.
+- Prints JSON with created screen IDs plus image/html URLs when available.
+
+If the SDK is missing, ask the user before installing it globally:
+
+```bash
+npm install -g @google/stitch-sdk
+```
+
+Supported SDK inputs:
+
+| Extension | Type |
+| --- | --- |
+| `.png` | Image screen |
+| `.jpg`, `.jpeg` | Image screen |
+| `.webp` | Image screen |
+| `.html`, `.htm` | Document screen |
+
+For uploaded image screens, `html` can be an empty string. That is normal: the upload creates an image screen. To get HTML, use Stitch UI/MCP edit or conversion steps afterward.
+
+## MCP upload fallback
+
+If the MCP tool `upload_screens_from_images` is available, image uploads can also use base64 payloads.
+
+Encode an image:
 
 ```bash
 bash scripts/encode-image.sh "path/to/screenshot.png"
 ```
 
-The script outputs raw base64 to stdout. Capture it for the API call.
-
-Supported formats and their MIME types:
-| Extension | MIME type |
-|-----------|----------|
-| `.png` | `image/png` |
-| `.jpg`, `.jpeg` | `image/jpeg` |
-| `.webp` | `image/webp` |
-| `.gif` | `image/gif` |
-
-## Step 2: Call the MCP tool
+Call the MCP tool
 
 ```json
 {
@@ -84,12 +123,14 @@ Returns session info similar to `generate_screen_from_text`. The uploaded images
 
 ## After uploading
 
-1. Call `stitch-mcp-list-screens` to find the new screen IDs
-2. Offer the user:
+1. Record the returned `projectId` and `screenId`.
+2. If the uploaded screen is an image and HTML is empty, tell the user this is expected.
+3. Offer the user:
    - "Edit this screen (change colors, layout, content)?" → `stitch-mcp-edit-screens`
    - "Convert directly to code?" → `stitch-mcp-get-screen` → framework conversion
    - "Generate variants based on this design?" → `stitch-mcp-generate-variants`
 
 ## References
 
+- `scripts/upload-screen.mjs` — SDK upload helper
 - `scripts/encode-image.sh` — Base64 encoding helper
