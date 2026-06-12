@@ -1,5 +1,46 @@
 # Changelog
 
+## [1.11.0](https://github.com/Shirtiny/stitch-kit/compare/stitch-kit-v1.10.0...stitch-kit-v1.11.0) (2026-06-12)
+
+
+### New Skills & Features
+
+* add 8 MCP wrappers, orchestrator iteration loop, native variants, design systems ([a77405a](https://github.com/Shirtiny/stitch-kit/commit/a77405a6248c22327a355124150a663c4364319f))
+* add npx installer for cross-platform setup ([1afa5ee](https://github.com/Shirtiny/stitch-kit/commit/1afa5ee09a74ba3abf40b1e7f51791e9363ec1af))
+* add prompt quality standard, project reuse, generation timing ([b525398](https://github.com/Shirtiny/stitch-kit/commit/b525398a07d422c8df6bb1192b76458daa420b9a))
+* add stitch-ideate conversational design agent with batch generation ([f73d3fd](https://github.com/Shirtiny/stitch-kit/commit/f73d3fd96a98b5b6a0fa35a733ea395b7106c80a))
+* auto-configure Stitch MCP with optional API key prompt ([c03ba72](https://github.com/Shirtiny/stitch-kit/commit/c03ba7221f74d651c846b21321cfcef4c1047c76))
+* enforce minimum 5 screens + component style guide per direction ([c8d7806](https://github.com/Shirtiny/stitch-kit/commit/c8d78064429acde12135ba120b3cdb5a624807ff))
+* initial release — stitch-kit v1.3.0 ([6ec1494](https://github.com/Shirtiny/stitch-kit/commit/6ec1494b578f8ea344fdbb11ebd9cebd96021a7f))
+* integrate full MCP DesignTheme params and replace deprecated GEMINI_3_PRO ([b871cd2](https://github.com/Shirtiny/stitch-kit/commit/b871cd2fa75533292cc5e560e44f5138e03910a5))
+* refactor installer to registry pattern with 7 CLI clients ([#3](https://github.com/Shirtiny/stitch-kit/issues/3)) ([a350fe7](https://github.com/Shirtiny/stitch-kit/commit/a350fe722155e602da3c5573a486b465ece72be8))
+* register agents directory in plugin manifest and marketplace ([181a7cf](https://github.com/Shirtiny/stitch-kit/commit/181a7cfe33d036ac581a934e0a0f9700465b7a9e))
+
+
+### Bug Fixes
+
+* add tools and color fields to agent frontmatter to match Claude Code agent format ([40edcf5](https://github.com/Shirtiny/stitch-kit/commit/40edcf55a859ba332e0572aa3f14132e6f4d6a9f))
+* move extra-files into packages config for release-please ([7512d84](https://github.com/Shirtiny/stitch-kit/commit/7512d84ab9b96b3460dc4d817161fd3831c3a47b))
+* remove agents field from marketplace plugins array (invalid schema) ([1ad69b7](https://github.com/Shirtiny/stitch-kit/commit/1ad69b7137be55d999989e34b15add7aeac043ad))
+* remove unverified agents field from plugin.json ([b0b1e7b](https://github.com/Shirtiny/stitch-kit/commit/b0b1e7b65ccf62a5c27be73347af2f1e126ee6a8))
+* rename plugin group to stitch-kit for agent auto-discovery ([e1cd72f](https://github.com/Shirtiny/stitch-kit/commit/e1cd72f79b2fe19bbd810eb4525ba14a29d4ed7b))
+* resolve plugin conflicting manifests error ([805586e](https://github.com/Shirtiny/stitch-kit/commit/805586e871d7ca17b40900ee8571d737c0d0d78c))
+* strip agent frontmatter to minimal format for plugin discovery ([69ec523](https://github.com/Shirtiny/stitch-kit/commit/69ec5235e9b50bfe37625afd99472bdbafb3843d))
+* switch release-please to node type for reliable version bumps ([436210d](https://github.com/Shirtiny/stitch-kit/commit/436210d461ceb5fe3b2920c36ffd44232664daef))
+* upgrade Node to 22 and npm to latest for OIDC trusted publishing ([08bcd7e](https://github.com/Shirtiny/stitch-kit/commit/08bcd7e4374fdb45042b9205a046a91de33b1ab3))
+* use remote HTTP server for Stitch MCP, not nonexistent npm package ([6c040cb](https://github.com/Shirtiny/stitch-kit/commit/6c040cb15a72e80e6e249fe747e9283ee2a01ca2))
+* use scoped package name and add automated npm publishing ([3810f81](https://github.com/Shirtiny/stitch-kit/commit/3810f81e422d4aaafcbaa0800ca080a69692b966))
+
+
+### Documentation
+
+* add agent install step — copy from plugin cache to ~/.claude/agents/ ([f44d21f](https://github.com/Shirtiny/stitch-kit/commit/f44d21ff9e3a17a07203c6ed8cc47f5407ee7b3c))
+* align all descriptions with "design superpowers" positioning ([49caa39](https://github.com/Shirtiny/stitch-kit/commit/49caa3902bd3c5cc12d578f73bfa08166168242c))
+* reframe README from "convert tool" to "design superpowers for coding agents" ([98f13e7](https://github.com/Shirtiny/stitch-kit/commit/98f13e78343123078163e929e32006e73e5300cb))
+* rewrite README with clearer positioning and personality ([6706797](https://github.com/Shirtiny/stitch-kit/commit/67067977dc172ef3df8ada3759b8d0d07206a400))
+* update agent definition and AGENTS.md for v1.5.0 ([57bb29f](https://github.com/Shirtiny/stitch-kit/commit/57bb29f428fe57cf4c13fe8d50f60db92c54f739))
+* update README, AGENTS.md, and agent definition for stitch-ideate ([91043c6](https://github.com/Shirtiny/stitch-kit/commit/91043c6e567394cd569773d77bfa6d2f2d708c32))
+
 ## [1.10.0](https://github.com/gabelul/stitch-kit/compare/stitch-kit-v1.9.0...stitch-kit-v1.10.0) (2026-03-24)
 
 
